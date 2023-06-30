@@ -1,0 +1,27 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+  color: var(--white);
+}
+
+:root{
+  background-color: var(--black);
+  --white: #FFF;
+  --black: #000;
+  --dark-red: #6F2232;
+  --light-red: #BF0000;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
