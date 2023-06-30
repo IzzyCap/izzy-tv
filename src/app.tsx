@@ -1,7 +1,7 @@
 import * as React from 'react';
 import ReactDOM from "react-dom/client";
 import './app.css'
-import Layout from './components/layout/layout';
+import Layout from './components/Layout/Layout';
 
 const App = () => {
 

@@ -1,7 +1,7 @@
 import { Fragment } from "react" // [TODO] Check Fragment docs on react.dev
-import MainHeader from "./main-header"
-import ListWrapper from "../ui/list-wrapper"
-import List from "../ui/list"
+import MainHeader from "./MainHeader"
+import ListWrapper from "../UI/list-wrapper"
+import List from "../UI/Slider"
 
 interface LayoutProps {
   children: React.ReactNode,
