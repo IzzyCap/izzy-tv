@@ -10,20 +10,28 @@ const initialState: SliderState = {
   currentPage: -1
 }
 
-export const fetchBestMovies = createAsyncThunk('bestMovies/fetch', async (thunkAPI) => {
-  const response = await fetch('https://justcors.com/tl_4aa3c46/https://gizmo.rakuten.tv/v3/lists/gratis-la-mejor-seleccion-de-peliculas?classification_id=5&device_identifier=web&locale=es&market_code=es')
-  const data = await response.json();
-  return data.data.contents.data as Movie[];
-});
+/**
+ * Create thunk with data fetching.
+ *
+ * @param {string} prefix The thunk ID prefix.
+ * @param {string} url The url to recieve data.
+ */
+const createSliderFetcher = (prefix: string, url: string) => {
+  return (
+    createAsyncThunk(prefix, async (thunkAPI) => {
+      const response = await fetch(url)
+      const data = await response.json();
+      return data.data.contents.data as Movie[];
+    })
+  )
+}
+
+export const fetchBestMovies = createSliderFetcher('bestMovies/fetch', 'https://justcors.com/tl_4aa3c46/https://gizmo.rakuten.tv/v3/lists/gratis-la-mejor-seleccion-de-peliculas?classification_id=5&device_identifier=web&locale=es&market_code=es');
 
 export const BestMoviesSliderSlice = createSlice({
   name: "bestMoviesSlider",
   initialState,
-  reducers: {
-    addMovie: (state: SliderState, action: PayloadAction<{ movie: Movie }>) => {
-      state.movies.push( action.payload.movie );
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchBestMovies.fulfilled, (state, action) => {
       state.movies = action.payload;
@@ -32,20 +40,12 @@ export const BestMoviesSliderSlice = createSlice({
   }
 });
 
-export const fetchStoreMovies = createAsyncThunk('storeMovies/fetch', async (thunkAPI) => {
-  const response = await fetch('https://justcors.com/tl_4aa3c46/https://gizmo.rakuten.tv/v3/lists/tienda-las-peliculas-del-momento?classification_id=5&device_identifier=web&locale=es&market_code=es')
-  const data = await response.json();
-  return data.data.contents.data as Movie[];
-});
+export const fetchStoreMovies = createSliderFetcher('storeMovies/fetch', 'https://justcors.com/tl_4aa3c46/https://gizmo.rakuten.tv/v3/lists/tienda-las-peliculas-del-momento?classification_id=5&device_identifier=web&locale=es&market_code=es');
 
 export const StoreMoviesSliderSlice = createSlice({
   name: "storeMoviesSlider",
   initialState,
-  reducers: {
-    addMovie: (state: SliderState, action: PayloadAction<{ movie: Movie }>) => {
-      state.movies.push( action.payload.movie );
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchStoreMovies.fulfilled, (state, action) => {
       state.movies = action.payload;
