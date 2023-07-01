@@ -1,5 +1,5 @@
 // As a temporal fix adding cors proxy from (https://justcors.com/) to avoid cors error
-const proxyPrefix: string = 'https://justcors.com/tl_95efa64/';
+const proxyPrefix: string = 'https://justcors.com/tl_4aa3c46/';
 const url: string = 'https://gizmo.rakuten.tv/v3/lists/';
 
 const categories: string[] = [
