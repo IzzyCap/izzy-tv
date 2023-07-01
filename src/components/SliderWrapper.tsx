@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-// import Slider from "./SliderItem";
 import { useAppSelector } from '../store/store';
 import { SliderState } from '../store/features/sliderSlice';
 import SliderItem from './SliderItem';
@@ -36,8 +35,8 @@ const Title = styled.h5`
 `
 
 const SliderWrapper:React.FC = () => {
-  const sliderBestMovies: SliderState = useAppSelector((state: any) => state.slider);
-  const sliderStoreMovies: SliderState = useAppSelector((state: any) => state.slider);
+  const sliderBestMovies: SliderState = useAppSelector((state: any) => state.bestMoviesSlider);
+  const sliderStoreMovies: SliderState = useAppSelector((state: any) => state.storeMoviesSlider);
   
   const createSliderBestMoviesItem = () => {
     return (
