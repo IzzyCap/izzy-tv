@@ -3,8 +3,18 @@ import ReactDOM from "react-dom/client";
 import './app.css'
 import Layout from './components/Layout';
 import { Provider } from 'react-redux';
+import { store, useAppDispatch } from './store/store';
+import { useEffect } from 'react';
+import { fetchBestMovies, fetchStoreMovies } from './store/features/sliderSlice';
 
 const App = () => {
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchBestMovies());
+    dispatch(fetchStoreMovies());
+  });
 
   return (
     <Layout>
@@ -14,5 +24,7 @@ const App = () => {
 
 const root = ReactDOM.createRoot(document.getElementById("app") as HTMLElement);
 root.render(
-  <App />
+  <Provider store={store}>
+    <App />
+  </Provider>
 );
