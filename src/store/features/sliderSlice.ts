@@ -1,13 +1,16 @@
-import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
+import { Categories, createEndpoint } from "../../helpers/endpoint";
 
 export interface SliderState {
   movies: Movie[],
   currentPage: number,
+  totalPages: number,
 }
 
 const initialState: SliderState = {
   movies: [],
-  currentPage: -1
+  currentPage: 0,
+  totalPages: 0,
 }
 
 /**
@@ -26,12 +29,16 @@ const createSliderFetcher = (prefix: string, url: string) => {
   )
 }
 
-export const fetchBestMovies = createSliderFetcher('bestMovies/fetch', 'https://justcors.com/tl_4aa3c46/https://gizmo.rakuten.tv/v3/lists/gratis-la-mejor-seleccion-de-peliculas?classification_id=5&device_identifier=web&locale=es&market_code=es');
+export const fetchBestMovies = createSliderFetcher('best/fetch', createEndpoint(Categories.Best));
 
-export const BestMoviesSliderSlice = createSlice({
-  name: "bestMoviesSlider",
+export const BestSliderSlice = createSlice({
+  name: "bestSlider",
   initialState,
-  reducers: {},
+  reducers: {
+    nextPage(state) {
+      state.currentPage = (state.currentPage + 1) % (state.totalPages + 1)
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchBestMovies.fulfilled, (state, action) => {
       state.movies = action.payload;
@@ -40,14 +47,28 @@ export const BestMoviesSliderSlice = createSlice({
   }
 });
 
-export const fetchStoreMovies = createSliderFetcher('storeMovies/fetch', 'https://justcors.com/tl_4aa3c46/https://gizmo.rakuten.tv/v3/lists/tienda-las-peliculas-del-momento?classification_id=5&device_identifier=web&locale=es&market_code=es');
+export const fetchStoreMovies = createSliderFetcher('store/fetch', createEndpoint(Categories.Store));
 
-export const StoreMoviesSliderSlice = createSlice({
-  name: "storeMoviesSlider",
+export const StoreSliderSlice = createSlice({
+  name: "storeSlider",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchStoreMovies.fulfilled, (state, action) => {
+      state.movies = action.payload;
+      state.currentPage = 0;
+    })
+  }
+});
+
+export const fetchOriginalMovies = createSliderFetcher('original/fetch', createEndpoint(Categories.Original));
+
+export const OriginalSliderSlice = createSlice({
+  name: "originalSlider",
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(fetchOriginalMovies.fulfilled, (state, action) => {
       state.movies = action.payload;
       state.currentPage = 0;
     })

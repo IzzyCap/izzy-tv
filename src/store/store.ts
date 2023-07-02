@@ -1,11 +1,12 @@
-import { BestMoviesSliderSlice, StoreMoviesSliderSlice } from "./features/sliderSlice";
+import { BestSliderSlice, OriginalSliderSlice, StoreSliderSlice } from "./features/sliderSlice";
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 export const store = configureStore({
   reducer: {
-    bestMoviesSlider: BestMoviesSliderSlice.reducer,
-    storeMoviesSlider: StoreMoviesSliderSlice.reducer,
+    bestSlider: BestSliderSlice.reducer,
+    storeSlider: StoreSliderSlice.reducer,
+    originalSlider: OriginalSliderSlice.reducer,
   }
 });
 export type RootState = ReturnType<typeof store.getState>;

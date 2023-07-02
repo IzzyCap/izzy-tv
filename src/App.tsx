@@ -5,7 +5,7 @@ import Layout from './components/Layout';
 import { Provider } from 'react-redux';
 import { store, useAppDispatch } from './store/store';
 import { useEffect } from 'react';
-import { fetchBestMovies, fetchStoreMovies } from './store/features/sliderSlice';
+import { fetchBestMovies, fetchStoreMovies, fetchOriginalMovies } from './store/features/sliderSlice';
 
 const App = () => {
 
@@ -14,6 +14,7 @@ const App = () => {
   useEffect(() => {
     dispatch(fetchBestMovies());
     dispatch(fetchStoreMovies());
+    dispatch(fetchOriginalMovies());
   });
 
   return (
