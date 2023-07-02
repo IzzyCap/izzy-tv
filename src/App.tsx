@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import './app.css'
 import Layout from './components/Layout';
 import { Provider } from 'react-redux';
-// import { store, useAppDispatch } from './store/store';
 import { useEffect } from 'react';
 import { fetchBestMovies } from './store/features/sliderSlice';
 import store, { useAppDispatch } from './store/store';

@@ -1,8 +1,11 @@
 import styled from 'styled-components';
-// import { useAppSelector } from '../store/store';
 import SliderItem from './SliderItem';
-// import { store, useAppDispatch } from '../store/store';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppSelector } from '../store/store';
+import { Categories } from '../helpers/endpoint';
+import { ISlider } from '../store/features/sliderSlice';
+import { NextPage, PrevPage } from '../store/services/sliders';
+import { useDispatch } from 'react-redux';
+import { useRef } from 'react';
 
 const SliderContainer = styled.div`
   width: 100%;
@@ -15,6 +18,7 @@ const SliderContainer = styled.div`
 const Slides = styled.div`
   width: 100%;
   display: flex;
+  /* overflow-x: auto; */
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
@@ -86,36 +90,39 @@ const Next = styled.div`
 
 interface SliderProps {
   title: string;
-  stateID: string;
+  category: Categories;
 }
 
-const Slider:React.FC<SliderProps> = ({title, stateID}: SliderProps) => {  
-  // const slider: SliderState = useAppSelector((state: any) => state[stateID]);
+const Slider:React.FC<SliderProps> = ({title, category}: SliderProps) => {  
   const dispatch = useDispatch();
-  const sliders = useSelector((state: any) => state.sliderSlice.sliders);
 
-  console.log('sliders');
-  console.log(sliders);
+  const sliderRef = useRef<HTMLDivElement>(null);
+
+  const slider = useAppSelector((state: any) => {
+    const sliders = state['sliderSlice'].sliders;
+    return sliders.find((slider: ISlider) => slider.category === category)
+  });
 
   const createSliderItems = () => {
-    return (<h1>Test</h1>);
-    // return (
-    //   slider.movies.map(movie => { 
-    //     return (<SliderItem key={movie.title} movie={movie} category='test'></SliderItem>)
-    //   })
-    // )
+    if (slider !== undefined) {
+      return (
+        slider.movies.map((movie: Movie) => { 
+          return (<SliderItem key={movie.title} movie={movie} category='test'></SliderItem>)
+        })
+      )
+    }
   }
 
   return (
     <SliderContainer>
       <Title>{title}</Title>
-      <Prev>
+      <Prev onClick={() => { PrevPage(dispatch, slider) }}>
         <img src='/icons/left-arrow.svg'/>
       </Prev>
-      <Next>
+      <Next onClick={() => { NextPage(dispatch, slider) }}>
         <img src='/icons/right-arrow.svg'/>
       </Next>
-      <Slides>
+      <Slides ref={sliderRef}>
         {createSliderItems()}
       </Slides>
     </SliderContainer>

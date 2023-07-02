@@ -1,9 +1,17 @@
-import { Slider, nextPage } from "../features/sliderSlice";
+import { ISlider, nextPage, prevPage } from "../features/sliderSlice";
 
-export const NextPage = async (dispatch: any, slider: Slider) => {
+export const NextPage = async (dispatch: any, slider: ISlider) => {
   try {
     dispatch(nextPage(slider))
-  } catch {
-    console.log('Error!');
+  } catch(ex) {
+    console.log(ex);
+  }
+}
+
+export const PrevPage = async (dispatch: any, slider: ISlider) => {
+  try {
+    dispatch(prevPage(slider))
+  } catch(ex) {
+    console.log(ex);
   }
 }

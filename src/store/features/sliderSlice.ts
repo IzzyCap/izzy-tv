@@ -1,19 +1,19 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 import { Categories, createEndpoint } from "../../helpers/endpoint";
 
-export interface Slider {
-  category: string;
+export interface ISlider {
+  category: Categories;
   movies: Movie[],
   currentPage: number,
   totalPages: number,
 }
 
 export interface SlidersState {
-  sliders: Slider[];
+  sliders: ISlider[],
 }
 
 const initialState: SlidersState = {
-  sliders: []
+  sliders: [],
 }
 
 /**
@@ -38,8 +38,8 @@ const sliderSlice = createSlice({
   name: "slider",
   initialState,
   reducers: {
-    nextPage(state, action) {
-      const sliders: Slider[] = state.sliders.map(slider => {
+    nextPage: (state, action) => {
+      const sliders: ISlider[] = state.sliders.map(slider => {
         if (slider.category === action.payload.category) {
           slider.currentPage++;
           if (slider.currentPage > slider.totalPages) {
@@ -50,13 +50,27 @@ const sliderSlice = createSlice({
         return slider;
       });
 
-      return { ...state, sliders: [...sliders]}
+      state.sliders = sliders;
+    },
+    prevPage: (state, action) => {
+      const sliders: ISlider[] = state.sliders.map(slider => {
+        if (slider.category === action.payload.category) {
+          slider.currentPage--;
+          if (slider.currentPage < 0) {
+            slider.currentPage = slider.totalPages;
+          }
+          console.log(`Slider ${slider.category} page: ${slider.currentPage}`);
+        }
+        return slider;
+      });
+
+      state.sliders = sliders;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchBestMovies.fulfilled, (state, action) => {
-      const slider: Slider = {
-        category: 'Best',
+      const slider: ISlider = {
+        category: Categories.Best,
         movies: action.payload,
         currentPage: 0,
         totalPages: 3,
@@ -67,6 +81,6 @@ const sliderSlice = createSlice({
   }
 });
 
-export const { nextPage } = sliderSlice.actions;
+export const { nextPage, prevPage } = sliderSlice.actions;
 
 export default sliderSlice.reducer;
