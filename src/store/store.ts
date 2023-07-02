@@ -1,14 +1,17 @@
-import { BestSliderSlice, OriginalSliderSlice, StoreSliderSlice } from "./features/sliderSlice";
+import { useDispatch } from "react-redux";
+import sliderSlice from "./features/sliderSlice";
 import { configureStore } from "@reduxjs/toolkit";
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+// import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
-export const store = configureStore({
+// export const store = configureStore({
+const store = configureStore({
   reducer: {
-    bestSlider: BestSliderSlice.reducer,
-    storeSlider: StoreSliderSlice.reducer,
-    originalSlider: OriginalSliderSlice.reducer,
-  }
+    sliderSlice: sliderSlice,
+  },
 });
-export type RootState = ReturnType<typeof store.getState>;
+
+
+export default store;
+// export type RootState = ReturnType<typeof store.getState>;
 export const useAppDispatch: () => typeof store.dispatch = useDispatch;
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+// export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

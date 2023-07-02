@@ -1,16 +1,19 @@
-import { PayloadAction, createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Categories, createEndpoint } from "../../helpers/endpoint";
 
-export interface SliderState {
+export interface Slider {
+  category: string;
   movies: Movie[],
   currentPage: number,
   totalPages: number,
 }
 
-const initialState: SliderState = {
-  movies: [],
-  currentPage: 0,
-  totalPages: 0,
+export interface SlidersState {
+  sliders: Slider[];
+}
+
+const initialState: SlidersState = {
+  sliders: []
 }
 
 /**
@@ -31,48 +34,39 @@ const createSliderFetcher = (prefix: string, url: string) => {
 
 export const fetchBestMovies = createSliderFetcher('best/fetch', createEndpoint(Categories.Best));
 
-export const BestSliderSlice = createSlice({
-  name: "bestSlider",
+const sliderSlice = createSlice({
+  name: "slider",
   initialState,
   reducers: {
-    nextPage(state) {
-      state.currentPage = (state.currentPage + 1) % (state.totalPages + 1)
+    nextPage(state, action) {
+      const sliders: Slider[] = state.sliders.map(slider => {
+        if (slider.category === action.payload.category) {
+          slider.currentPage++;
+          if (slider.currentPage > slider.totalPages) {
+            slider.currentPage = 0;
+          }
+          console.log(`Slider ${slider.category} page: ${slider.currentPage}`);
+        }
+        return slider;
+      });
+
+      return { ...state, sliders: [...sliders]}
     },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchBestMovies.fulfilled, (state, action) => {
-      state.movies = action.payload;
-      state.currentPage = 0;
+      const slider: Slider = {
+        category: 'Best',
+        movies: action.payload,
+        currentPage: 0,
+        totalPages: 3,
+      }
+
+      state.sliders.push(slider);
     })
   }
 });
 
-export const fetchStoreMovies = createSliderFetcher('store/fetch', createEndpoint(Categories.Store));
+export const { nextPage } = sliderSlice.actions;
 
-export const StoreSliderSlice = createSlice({
-  name: "storeSlider",
-  initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(fetchStoreMovies.fulfilled, (state, action) => {
-      state.movies = action.payload;
-      state.currentPage = 0;
-    })
-  }
-});
-
-export const fetchOriginalMovies = createSliderFetcher('original/fetch', createEndpoint(Categories.Original));
-
-export const OriginalSliderSlice = createSlice({
-  name: "originalSlider",
-  initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(fetchOriginalMovies.fulfilled, (state, action) => {
-      state.movies = action.payload;
-      state.currentPage = 0;
-    })
-  }
-});
-
-
+export default sliderSlice.reducer;

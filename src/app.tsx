@@ -3,18 +3,16 @@ import ReactDOM from "react-dom/client";
 import './app.css'
 import Layout from './components/Layout';
 import { Provider } from 'react-redux';
-import { store, useAppDispatch } from './store/store';
+// import { store, useAppDispatch } from './store/store';
 import { useEffect } from 'react';
-import { fetchBestMovies, fetchStoreMovies, fetchOriginalMovies } from './store/features/sliderSlice';
+import { fetchBestMovies } from './store/features/sliderSlice';
+import store, { useAppDispatch } from './store/store';
 
 const App = () => {
-
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchBestMovies());
-    dispatch(fetchStoreMovies());
-    dispatch(fetchOriginalMovies());
   });
 
   return (

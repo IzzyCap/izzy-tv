@@ -1,7 +1,8 @@
 import styled from 'styled-components';
-import { SliderState } from '../store/features/sliderSlice';
-import { useAppSelector } from '../store/store';
+// import { useAppSelector } from '../store/store';
 import SliderItem from './SliderItem';
+// import { store, useAppDispatch } from '../store/store';
+import { useDispatch, useSelector } from 'react-redux';
 
 const SliderContainer = styled.div`
   width: 100%;
@@ -89,18 +90,20 @@ interface SliderProps {
 }
 
 const Slider:React.FC<SliderProps> = ({title, stateID}: SliderProps) => {  
-  const slider: SliderState = useAppSelector((state: any) => state[stateID]);
-  slider.nextPage();
-  slider.nextPage();
-  slider.nextPage();
-  slider.nextPage();
-  
+  // const slider: SliderState = useAppSelector((state: any) => state[stateID]);
+  const dispatch = useDispatch();
+  const sliders = useSelector((state: any) => state.sliderSlice.sliders);
+
+  console.log('sliders');
+  console.log(sliders);
+
   const createSliderItems = () => {
-    return (
-      slider.movies.map(movie => { 
-        return (<SliderItem key={movie.title} movie={movie} category='test'></SliderItem>)
-      })
-    )
+    return (<h1>Test</h1>);
+    // return (
+    //   slider.movies.map(movie => { 
+    //     return (<SliderItem key={movie.title} movie={movie} category='test'></SliderItem>)
+    //   })
+    // )
   }
 
   return (
