@@ -18,7 +18,7 @@ const SliderContainer = styled.div`
 const Slides = styled.div`
   width: 100%;
   display: flex;
-  /* overflow-x: auto; */
+  overflow-x: hidden;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
@@ -46,6 +46,7 @@ const Prev = styled.div`
   left: 0;
   width: 40px;
   height: 100%;
+  z-index: 100;
   img {
     width: 100%;
     height: 100%;
@@ -71,6 +72,7 @@ const Next = styled.div`
   width: 40px;
   height: 100%;
   justify-content: center;
+  z-index: 100;
   img {
     width: 100%;
     height: 100%;
@@ -116,10 +118,22 @@ const Slider:React.FC<SliderProps> = ({title, category}: SliderProps) => {
   return (
     <SliderContainer>
       <Title>{title}</Title>
-      <Prev onClick={() => { PrevPage(dispatch, slider) }}>
+      <Prev onClick={() => { 
+          PrevPage(dispatch, slider);
+          if (sliderRef.current?.scrollLeft) {
+            sliderRef.current.scrollLeft -= sliderRef.current?.clientWidth;
+          }
+        }
+      }>
         <img src='/icons/left-arrow.svg'/>
       </Prev>
-      <Next onClick={() => { NextPage(dispatch, slider) }}>
+      <Next onClick={() => {
+          NextPage(dispatch, slider);
+          if (sliderRef.current?.scrollLeft) {
+            sliderRef.current.scrollLeft += sliderRef.current?.clientWidth;
+          }
+        }
+      }>
         <img src='/icons/right-arrow.svg'/>
       </Next>
       <Slides ref={sliderRef}>
