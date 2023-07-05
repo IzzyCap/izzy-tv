@@ -1,14 +1,12 @@
 // As a temporal fix adding cors proxy from (https://justcors.com/) to avoid cors error
-const proxyPrefix: string = 'https://justcors.com/tl_1fb6cfc/';
-const url: string = 'https://gizmo.rakuten.tv/v3/lists/';
+const proxyPrefix: string = 'https://justcors.com/tl_f4b7a4a/';
+const url: string = 'https://gizmo.rakuten.tv/';
+
+const listPath: string = 'v3/lists/';
+const moviesPath: string = 'v3/movies/';
+const trailerPath: string = 'v3/me/streamings'
 
 const urlParameters: string = '?classification_id=5&device_identifier=web&locale=es&market_code=es';
-
-export const endpoint = {
-  proxyPrefix,
-  url,
-  urlParameters
-};
 
 export enum Categories {
   Best = 'gratis-la-mejor-seleccion-de-peliculas',
@@ -20,6 +18,36 @@ export enum Categories {
   Family = 'gratis-peliculas-familiares',
 };
 
-export const createEndpoint = (category: Categories) => {
-  return `${proxyPrefix}${endpoint.url}${category}${urlParameters}`;
+export const createCategoryEndpoint = (category: Categories) => {
+  return `${proxyPrefix}${url}${listPath}${category}${urlParameters}`;
+}
+
+export const fetchMovie = (id: string): Promise<Response> => {
+  const fetchUrl = `${proxyPrefix}${url}${moviesPath}${id}${urlParameters}`;
+
+  return fetch(fetchUrl);
+}
+
+export const fetchTrailer = (id: string): Promise<Response>  => {
+  const fetchUrl = `${proxyPrefix}${url}${trailerPath}${urlParameters}`;
+  
+  const data = {
+    audio_language: 'SPA',
+    audio_quality: '2.0',
+    content_id: id,
+    content_type: 'movies',
+    device_serial: 'device_serial_1',
+    device_stream_video_quality: 'FHD',
+    player: 'web:PD-NONE',
+    subtitle_language: 'MIS',
+    video_type: 'trailer',
+  } 
+
+  return fetch(fetchUrl, {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers:{
+      'Content-Type': 'application/json'
+    }
+  });
 }

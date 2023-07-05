@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
-import { Categories, createEndpoint } from "../../helpers/endpoint";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { Categories, createCategoryEndpoint } from "../../helpers/endpoint";
 
 export interface ISlider {
   category: Categories;
@@ -32,7 +32,8 @@ const createSliderFetcher = (prefix: string, url: string) => {
   )
 }
 
-export const fetchBestMovies = createSliderFetcher('best/fetch', createEndpoint(Categories.Best));
+export const fetchBest = createSliderFetcher('best/fetch', createCategoryEndpoint(Categories.Best));
+export const fetchStore = createSliderFetcher('store/fetch', createCategoryEndpoint(Categories.Store));
 
 const sliderSlice = createSlice({
   name: "slider",
@@ -68,9 +69,19 @@ const sliderSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchBestMovies.fulfilled, (state, action) => {
+    builder.addCase(fetchBest.fulfilled, (state, action) => {
       const slider: ISlider = {
         category: Categories.Best,
+        movies: action.payload,
+        currentPage: 0,
+        totalPages: 3,
+      }
+
+      state.sliders.push(slider);
+    }),
+    builder.addCase(fetchStore.fulfilled, (state, action) => {
+      const slider: ISlider = {
+        category: Categories.Store,
         movies: action.payload,
         currentPage: 0,
         totalPages: 3,

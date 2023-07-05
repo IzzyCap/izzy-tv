@@ -30,7 +30,7 @@ const Title = styled.h5`
   display: block;
   word-break: break-word;
   font-size: 1.2rem;
-  /* font-family: "RakutenSans Bold", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Oxygen, Cantarell, sans-serif; */
+  font-family: RakutenSans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Oxygen, Cantarell, sans-serif;
   font-weight: bold;
   color: rgb(240, 240, 240);
   text-align: left;

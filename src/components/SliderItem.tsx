@@ -26,18 +26,6 @@ const CardSkeleton = styled.div`
   background: rgb(51, 51, 51);
   width: 100%;
   height: 100%;
-  /* &:hover {
-    background: linear-gradient(rgb(0, 0, 0) 50%, rgb(33, 33, 33) 100%);
-    width: 336px;
-    height: 470px;
-    transform: translateX(-50%) translateY(-50%);
-    border-radius: 6px;
-    box-shadow: rgba(0, 0, 0, 0.65) 0px 0px 50px 16px;
-    z-index: 50;
-    overflow: auto;
-    transform: translate(-50%, -50%);
-    margin: -50%;
-  } */
 `
 
 const CardImage = styled.img`
@@ -57,7 +45,6 @@ interface SliderItemProps {
 }
 
 const SliderItem:React.FC<SliderItemProps> = ({movie, category}: SliderItemProps) => {
-  console.log(movie);
   return (
     <>
       <Slide href={`/details/${movie.id}`}>
