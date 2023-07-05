@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import SliderItem from './SliderItem';
 import { useAppSelector } from '../store/store';
-import { Categories } from '../helpers/endpoint';
+import { Categories } from '../utils/endpoint';
 import { ISlider } from '../store/features/sliderSlice';
 import { NextPage, PrevPage } from '../store/services/sliders';
 import { useDispatch } from 'react-redux';
@@ -30,7 +30,6 @@ const Title = styled.h5`
   display: block;
   word-break: break-word;
   font-size: 1.2rem;
-  font-family: RakutenSans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Oxygen, Cantarell, sans-serif;
   font-weight: bold;
   color: rgb(240, 240, 240);
   text-align: left;

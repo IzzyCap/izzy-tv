@@ -1,9 +1,15 @@
 import styled from 'styled-components';
 
 const MenuWrapper = styled.div`
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
   display: block;
   height: 88px;
   padding: 0px 64px;
+  background-color: black;
+  z-index: 1000;
 `
 
 const HeaderLogo = styled.img`

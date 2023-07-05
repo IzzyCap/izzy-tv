@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { Categories, createCategoryEndpoint } from "../../helpers/endpoint";
+import { Categories, createCategoryEndpoint } from "../../utils/endpoint";
 
 export interface ISlider {
   category: Categories;

@@ -1,6 +1,6 @@
 import React from 'react';
 import Slider from '../components/Slider';
-import { Categories } from '../helpers/endpoint';
+import { Categories } from '../utils/endpoint';
 
 export const HomePage = () => {
   return (

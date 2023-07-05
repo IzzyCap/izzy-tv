@@ -1,6 +1,6 @@
 import * as React from 'react';
 import ReactDOM from "react-dom/client";
-import './app.css'
+import './App.css'
 import { Provider } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchAction, fetchBest, fetchOriginal, fetchStore, fetchDrama, fetchFamily, fetchSuspense } from './store/features/sliderSlice';

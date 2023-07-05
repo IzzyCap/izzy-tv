@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import { useParams } from 'react-router-dom';
-import { fetchTrailer } from '../helpers/endpoint';
+import { fetchTrailer } from '../utils/endpoint';
 import { Link } from "react-router-dom";
 
 const PlayerContainer = styled.div`
   position: fixed;
-  top: 0px;
+  top: 88px;
   left: 0px;
   width: 100%;
   height: 100%;
@@ -17,25 +17,15 @@ const PlayerContainer = styled.div`
 const VideoPlayer = styled.iframe`
   width: 100%;
   height: 100%;
-  padding: 50px;
   border: none;
-`
-
-const TopHeader = styled.div`
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  display: flex;
-  flex-flow: column;
-  padding: 24px 16px;
-  transition: all 0.15s ease 0s;
+  padding-bottom: 164px;
 `
 
 const BackButton = styled(Link)`
   cursor: pointer;
   margin-top: 5px;
   margin-left: 15px;
+  padding: 24px 16px;
   img {
     width:40px;
     height:40px
@@ -59,11 +49,9 @@ export const PlayerPage = () => {
 
   return (
     <PlayerContainer>
-      <TopHeader>
-        <BackButton to={`/details/${id}`}>
-          <img src='/icons/back-button.svg'/>
-        </BackButton>
-      </TopHeader>
+      <BackButton to={`/details/${id}`}>
+        <img src='/icons/back-button.svg'/>
+      </BackButton>
       <VideoPlayer src={videoUrl}></VideoPlayer>
     </PlayerContainer>
   )

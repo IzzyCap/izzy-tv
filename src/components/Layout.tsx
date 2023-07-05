@@ -1,9 +1,14 @@
 import { Fragment } from "react";
 import MainHeader from "./MainHeader";
+import styled from 'styled-components';
 
 interface LayoutProps {
   children: React.ReactNode,
 }
+
+const Content = styled.div`
+  margin-top: 88px;
+`
 
 const Layout:React.FC<LayoutProps> = ({children}: LayoutProps) => {
 
@@ -12,7 +17,9 @@ const Layout:React.FC<LayoutProps> = ({children}: LayoutProps) => {
       <div>
         <MainHeader/>
       </div>
-      { children }
+      <Content>
+        { children }
+      </Content>
     </Fragment>
   )
 }

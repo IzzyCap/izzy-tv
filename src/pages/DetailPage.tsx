@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
-import { fetchMovie } from '../helpers/endpoint';
+import { fetchMovie } from '../utils/endpoint';
 import { Link } from "react-router-dom";
 
 const Overly = styled.div`
@@ -87,7 +87,6 @@ const TextContainer = styled.div`
 
 const BannerTitle = styled.h2`
   margin: 0;
-  font-family: RakutenSans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Oxygen, Cantarell, sans-serif;
   z-index: 200;
 `
 
@@ -114,9 +113,9 @@ const TrailerButton = styled(Link)`
   min-width: 120px;
   padding: 0px 24px;
   background: rgb(240, 240, 240);
-  font-family: RakutenSans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Oxygen, Cantarell, sans-serif;
   color: rgb(0, 0, 0);
   width: 100%;
+  text-decoration:none;
   &:hover {
     background: rgb(200, 200, 200);
   }
@@ -126,7 +125,6 @@ const ButtonText = styled.span`
   color: rgb(0, 0, 0);
   font-size: 1rem;
   font-weight: 700;
-  font-family: RakutenSans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Oxygen, Cantarell, sans-serif;
   margin-left: 12px;
 `
 
@@ -136,7 +134,6 @@ const Description = styled.div`
   display: block;
   word-break: break-word;
   font-size: 1rem;
-  font-family: RakutenSans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Oxygen, Cantarell, sans-serif;
   font-weight: normal;
   color: rgb(132, 133, 133);
   text-align: left;
