@@ -1,7 +1,5 @@
-import { Fragment } from "react" // [TODO] Check Fragment docs on react.dev
-import MainHeader from "./MainHeader"
-import ListWrapper from "./SliderWrapper"
-import { styled } from "styled-components"
+import { Fragment } from "react";
+import MainHeader from "./MainHeader";
 
 interface LayoutProps {
   children: React.ReactNode,
@@ -14,7 +12,7 @@ const Layout:React.FC<LayoutProps> = ({children}: LayoutProps) => {
       <div>
         <MainHeader/>
       </div>
-      <ListWrapper/>
+      { children }
     </Fragment>
   )
 }

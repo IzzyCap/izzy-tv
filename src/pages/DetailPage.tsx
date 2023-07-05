@@ -2,9 +2,10 @@ import React, {useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { fetchMovie } from '../helpers/endpoint';
+import { Link } from "react-router-dom";
 
 const Overly = styled.div`
-  position: fixed;
+  position: fixed; 
   top: 0px;
   left: 0px;
   width: 100%;
@@ -32,7 +33,7 @@ const DetailsCard = styled.div`
   position: absolute;
   width: 100%;
   min-height: calc(100% - 32px);
-  top: 32px;
+  top: 88px;
   max-width: 636px;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
@@ -55,6 +56,7 @@ const ImgContainer = styled.div`
   position: absolute;
   top: 0px;
   left: 0px;
+  background: rgb(51, 51, 51);
   width: 100%;
   height: 100%;
 `
@@ -65,9 +67,10 @@ const BannerImg = styled.img`
   left: 0px;
   width: 100%;
   height: 100%;
-  filter: brightness(70%);
-  transition: opacity 0.15s ease-out 0.35s;
+  filter: brightness(65%);
+  transition: opacity 180ms ease-out 0s, transform 0.15s ease-out 0s;
   opacity: 1;
+  z-index: 100;
 `
 
 const TextContainer = styled.div`
@@ -83,9 +86,9 @@ const TextContainer = styled.div`
 `
 
 const BannerTitle = styled.h2`
-  line-height: 54px;
   margin: 0;
   font-family: RakutenSans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Oxygen, Cantarell, sans-serif;
+  z-index: 200;
 `
 
 const Container = styled.div`
@@ -98,7 +101,7 @@ const ButtonArea = styled.div`
   margin-right: 24px;
 `
 
-const TrailerButton = styled.a`
+const TrailerButton = styled(Link)`
   display: flex;
   -webkit-box-align: center;
   align-items: center;
@@ -141,7 +144,7 @@ const Description = styled.div`
 `
 
 // [TODO] Move CloseButton to component
-const CloseButton = styled.a`
+const CloseButton = styled(Link)`
   position: absolute;
   top: 32px;
   right: 32px;
@@ -158,6 +161,7 @@ const CloseButton = styled.a`
   height: 32px;
   background: rgba(0, 0, 0, 0.55);
   border: 1px solid rgba(240, 240, 240, 0.64);
+  z-index: 200;
 `
 
 export const DetailPage = () => {
@@ -179,12 +183,12 @@ export const DetailPage = () => {
       <Overly/>
       <DetailsContainer>
         <DetailsCard>
-          <CloseButton href='/'>
+          <CloseButton to='/'>
             <img src='/icons/close.svg'/>
           </CloseButton>
           <BannerContainer>
             <ImgContainer>
-              <BannerImg src={movie?.data.images.snapshot || ''}/>
+              <BannerImg src={movie?.data.images.snapshot || ''} loading="lazy"/>
             </ImgContainer>
             <TextContainer>
               <BannerTitle>{movie?.data.title}</BannerTitle>
@@ -192,7 +196,7 @@ export const DetailPage = () => {
           </BannerContainer>
           <Container>
             <ButtonArea>
-              <TrailerButton href={`/player/${id}`}>
+              <TrailerButton to={`/player/${id}`}>
                 <img src='/icons/play.svg'/>
                 <ButtonText>
                   Ver Tráiler

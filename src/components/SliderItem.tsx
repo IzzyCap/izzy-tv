@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { Link } from "react-router-dom";
 
-const Slide = styled.a`
+const Slide  = styled(Link)`
   scroll-snap-align: start;
   flex-shrink: 0;
   margin: 0px 2px;
@@ -37,6 +38,7 @@ const CardImage = styled.img`
   transition: opacity 180ms ease-out 0s, transform 0.15s ease-out 0s;
   opacity: 1;
   height: 100%;
+  z-index:100;
 `
 
 interface SliderItemProps {
@@ -45,12 +47,13 @@ interface SliderItemProps {
 }
 
 const SliderItem:React.FC<SliderItemProps> = ({movie, category}: SliderItemProps) => {
+  console.log(movie);
   return (
     <>
-      <Slide href={`/details/${movie.id}`}>
+      <Slide to={`/details/${movie.id}`}>
         <CardContainer>
           <CardSkeleton>
-            <CardImage src={movie.images.artwork}></CardImage>
+            <CardImage src={movie.images.artwork.replace('.jpeg', '-width317-quality60.jpeg')} loading="lazy"></CardImage>
           </CardSkeleton>
         </CardContainer>
       </Slide>

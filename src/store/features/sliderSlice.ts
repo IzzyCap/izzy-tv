@@ -34,6 +34,12 @@ const createSliderFetcher = (prefix: string, url: string) => {
 
 export const fetchBest = createSliderFetcher('best/fetch', createCategoryEndpoint(Categories.Best));
 export const fetchStore = createSliderFetcher('store/fetch', createCategoryEndpoint(Categories.Store));
+export const fetchOriginal = createSliderFetcher('original/fetch', createCategoryEndpoint(Categories.Original));
+export const fetchAction = createSliderFetcher('action/fetch', createCategoryEndpoint(Categories.Action));
+export const fetchDrama = createSliderFetcher('drama/fetch', createCategoryEndpoint(Categories.Drama));
+export const fetchSuspense = createSliderFetcher('suspense/fetch', createCategoryEndpoint(Categories.Suspense));
+export const fetchFamily = createSliderFetcher('family/fetch', createCategoryEndpoint(Categories.Family));
+
 
 const sliderSlice = createSlice({
   name: "slider",
@@ -82,6 +88,56 @@ const sliderSlice = createSlice({
     builder.addCase(fetchStore.fulfilled, (state, action) => {
       const slider: ISlider = {
         category: Categories.Store,
+        movies: action.payload,
+        currentPage: 0,
+        totalPages: 3,
+      }
+
+      state.sliders.push(slider);
+    }),
+    builder.addCase(fetchOriginal.fulfilled, (state, action) => {
+      const slider: ISlider = {
+        category: Categories.Original,
+        movies: action.payload,
+        currentPage: 0,
+        totalPages: 3,
+      }
+
+      state.sliders.push(slider);
+    }),
+    builder.addCase(fetchAction.fulfilled, (state, action) => {
+      const slider: ISlider = {
+        category: Categories.Action,
+        movies: action.payload,
+        currentPage: 0,
+        totalPages: 3,
+      }
+
+      state.sliders.push(slider);
+    }),
+    builder.addCase(fetchDrama.fulfilled, (state, action) => {
+      const slider: ISlider = {
+        category: Categories.Drama,
+        movies: action.payload,
+        currentPage: 0,
+        totalPages: 3,
+      }
+
+      state.sliders.push(slider);
+    }),
+    builder.addCase(fetchSuspense.fulfilled, (state, action) => {
+      const slider: ISlider = {
+        category: Categories.Suspense,
+        movies: action.payload,
+        currentPage: 0,
+        totalPages: 3,
+      }
+
+      state.sliders.push(slider);
+    }),
+    builder.addCase(fetchFamily.fulfilled, (state, action) => {
+      const slider: ISlider = {
+        category: Categories.Family,
         movies: action.payload,
         currentPage: 0,
         totalPages: 3,

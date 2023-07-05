@@ -101,6 +101,7 @@ const Slider:React.FC<SliderProps> = ({title, category}: SliderProps) => {
   const sliderRef = useRef<HTMLDivElement>(null);
 
   const slider = useAppSelector((state: any) => {
+    // [TODO] maybe change sliderSlice to mainSlice
     const sliders = state['sliderSlice'].sliders;
     return sliders.find((slider: ISlider) => slider.category === category)
   });

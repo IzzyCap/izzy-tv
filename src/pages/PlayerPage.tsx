@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { fetchTrailer } from '../helpers/endpoint';
+import { Link } from "react-router-dom";
 
 const PlayerContainer = styled.div`
   position: fixed;
@@ -31,7 +32,7 @@ const TopHeader = styled.div`
   transition: all 0.15s ease 0s;
 `
 
-const BackButton = styled.a`
+const BackButton = styled(Link)`
   cursor: pointer;
   margin-top: 5px;
   margin-left: 15px;
@@ -59,7 +60,7 @@ export const PlayerPage = () => {
   return (
     <PlayerContainer>
       <TopHeader>
-        <BackButton href={`/details/${id}`}>
+        <BackButton to={`/details/${id}`}>
           <img src='/icons/back-button.svg'/>
         </BackButton>
       </TopHeader>
