@@ -3,7 +3,7 @@ import SliderItem from "./SliderItem";
 import { useAppSelector } from "../store/store";
 import { Categories } from "../utils/endpoint";
 import { ISlider } from "../store/features/mainSlice";
-import { NextPage, PrevPage } from "../store/services/sliders";
+import { NextPage, PrevPage } from "../store/services";
 import { useDispatch } from "react-redux";
 import { useRef } from "react";
 

@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { styled } from "styled-components";
 import { fetchMovie } from "../utils/endpoint";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { SetActiveMovie } from "../store/services";
 
 const Overly = styled.div`
   position: fixed;
@@ -168,6 +170,8 @@ export const DetailPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     fetchMovie(id || "")
       .then((response) => response.json())
@@ -210,7 +214,7 @@ export const DetailPage = () => {
           </BannerContainer>
           <Container>
             <ButtonArea>
-              <TrailerButton to={`/player/${id}`}>
+              <TrailerButton to={`/player/${id}`} onClick={() => SetActiveMovie(dispatch, movie)}>
                 <img src="/icons/play.svg" />
                 <ButtonText>Ver Tráiler</ButtonText>
               </TrailerButton>

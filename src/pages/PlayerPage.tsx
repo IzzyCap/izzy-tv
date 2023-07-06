@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { fetchTrailer } from "../utils/endpoint";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { ClearActiveMovie } from "../store/services";
 
 const PlayerContainer = styled.div`
   position: fixed;
@@ -38,6 +40,8 @@ export const PlayerPage = () => {
   const [videoUrl, setVideoUrl] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  
+  const dispatch = useDispatch();
 
   useEffect(() => {
     fetchTrailer(id || "")
@@ -62,7 +66,7 @@ export const PlayerPage = () => {
 
   return (
     <PlayerContainer>
-      <BackButton to={`/details/${id}`}>
+      <BackButton to={`/details/${id}`} onClick={() => ClearActiveMovie(dispatch)}>
         <img src="/icons/back-button.svg" />
       </BackButton>
       <VideoPlayer src={videoUrl}></VideoPlayer>

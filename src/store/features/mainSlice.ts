@@ -132,6 +132,6 @@ const mainSlice = createSlice({
   },
 });
 
-export const { nextPage, prevPage } = mainSlice.actions;
+export const { nextPage, prevPage, setActiveMovie, clearActiveMovie } = mainSlice.actions;
 
 export default mainSlice.reducer;

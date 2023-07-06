@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useAppSelector } from "../store/store";
 
 const MenuWrapper = styled.div`
   position: fixed;
@@ -25,13 +26,25 @@ const Menu = styled.nav`
 `;
 
 const MainHeader: React.FC = () => {
+  const activeMovie = useAppSelector((state: any) => state["mainSlice"].activeMovie);
+
+  const renderTilte = () => {
+    if (!activeMovie) {
+      return (
+        <a>
+          <HeaderLogo src="/rakuten/logo.svg" alt="rakuten logo"></HeaderLogo>
+        </a>
+      );
+    }
+
+    return (<h1>{activeMovie.data.title}</h1>)
+  }
+
   return (
     <header>
       <MenuWrapper>
         <Menu>
-          <a>
-            <HeaderLogo src="/rakuten/logo.svg" alt="rakuten logo"></HeaderLogo>
-          </a>
+          {renderTilte()}
         </Menu>
       </MenuWrapper>
     </header>
