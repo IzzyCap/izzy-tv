@@ -17,15 +17,24 @@
     "clean": "rm -rf dist/*",
     "build": "vite --config vite.config.js build",
     "dev": "vite --config vite.config.js serve",
-    "preview": "vite --config vite.config.js preview"
+    "preview": "vite --config vite.config.js preview",
+    "test": "vitest",
+    "test-ui": "vitest --ui"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
     "@types/redux-logger": "^3.0.9",
     "@types/styled-components": "^5.1.26",
     "@vitejs/plugin-react": "^4.0.1",
+    "@vitest/ui": "^0.33.0",
+    "jsdom": "^22.1.0",
+    "msw": "^1.2.2",
     "typescript": "^5.1.6",
-    "vite": "^4.3.9"
+    "vite": "^4.3.9",
+    "vitest": "^0.33.0",
+    "whatwg-fetch": "^3.6.2"
   }
 }

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const MenuWrapper = styled.div`
   position: fixed;
@@ -10,7 +10,7 @@ const MenuWrapper = styled.div`
   padding: 0px 64px;
   background-color: black;
   z-index: 1000;
-`
+`;
 
 const HeaderLogo = styled.img`
   width: 114px;
@@ -24,19 +24,18 @@ const Menu = styled.nav`
   height: 100%;
 `;
 
-const MainHeader:React.FC = () => {
-
+const MainHeader: React.FC = () => {
   return (
     <header>
       <MenuWrapper>
         <Menu>
           <a>
-            <HeaderLogo src='/rakuten/logo.svg' alt='rakuten logo'></HeaderLogo>
+            <HeaderLogo src="/rakuten/logo.svg" alt="rakuten logo"></HeaderLogo>
           </a>
         </Menu>
       </MenuWrapper>
     </header>
-  )
-}
+  );
+};
 
-export default MainHeader
+export default MainHeader;

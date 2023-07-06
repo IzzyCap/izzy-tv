@@ -8,17 +8,18 @@ body {
 }
 
 * {
-  font-family: RakutenSans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Oxygen, Cantarell, sans-serif;
+  font-family: RakutenSans, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Oxygen, Cantarell, sans-serif;
   box-sizing: border-box;
   color: var(--white);
 }
 
-:root{
+:root {
   background-color: var(--black);
-  --white: #FFF;
+  --white: #fff;
   --black: #000;
-  --dark-red: #6F2232;
-  --light-red: #BF0000;
+  --dark-red: #6f2232;
+  --light-red: #bf0000;
 }
 
 #app {

@@ -1,19 +1,27 @@
-import * as React from 'react';
+import * as React from "react";
 import ReactDOM from "react-dom/client";
-import './App.css'
-import { Provider } from 'react-redux';
-import { useEffect } from 'react';
-import { fetchAction, fetchBest, fetchOriginal, fetchStore, fetchDrama, fetchFamily, fetchSuspense } from './store/features/sliderSlice';
-import store, { useAppDispatch } from './store/store';
+import "./App.css";
+import { Provider } from "react-redux";
+import { useEffect } from "react";
+import {
+  fetchAction,
+  fetchBest,
+  fetchOriginal,
+  fetchStore,
+  fetchDrama,
+  fetchFamily,
+  fetchSuspense,
+} from "./store/features/mainSlice";
+import store, { useAppDispatch } from "./store/store";
 
 // pages
-import { HomePage } from './pages/HomePage';
-import { DetailPage } from './pages/DetailPage';
-import { PlayerPage } from './pages/PlayerPage';
+import { HomePage } from "./pages/HomePage";
+import { DetailPage } from "./pages/DetailPage";
+import { PlayerPage } from "./pages/PlayerPage";
 
 // router
-import { Route, Routes, BrowserRouter } from 'react-router-dom';
-import Layout from './components/Layout';
+import { Route, Routes, BrowserRouter } from "react-router-dom";
+import Layout from "./components/Layout";
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -32,17 +40,17 @@ const App = () => {
   return (
     <>
       <Layout>
-        <HomePage/>
+        <HomePage />
         <Routes>
-          <Route path='/details/:id' element={<DetailPage/>}/>
-          <Route path='/player/:id' element={<PlayerPage/>}/>
+          <Route path="/details/:id" element={<DetailPage />} />
+          <Route path="/player/:id" element={<PlayerPage />} />
         </Routes>
       </Layout>
     </>
-  )
-}
+  );
+};
 
-const root = ReactDOM.createRoot(document.getElementById('app') as HTMLElement);
+const root = ReactDOM.createRoot(document.getElementById("app") as HTMLElement);
 root.render(
   <Provider store={store}>
     <BrowserRouter>

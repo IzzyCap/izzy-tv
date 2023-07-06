@@ -1,7 +1,8 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-const Slide  = styled(Link)`
+// Styled component for the slide item, a link to the movie details page
+const Slide = styled(Link)`
   scroll-snap-align: start;
   flex-shrink: 0;
   margin: 0px 2px;
@@ -10,14 +11,16 @@ const Slide  = styled(Link)`
   justify-content: center;
   align-items: center;
   top: 0px;
-`
+`;
 
+// Styled component for the container of the card
 const CardContainer = styled.div`
   position: relative;
   transition: transform 0.15s ease-out 0s;
   padding: 69.8738% 0px;
-`
+`;
 
+// Styled component for the skeleton of the card
 const CardSkeleton = styled.div`
   position: absolute;
   top: 50%;
@@ -27,8 +30,9 @@ const CardSkeleton = styled.div`
   background: rgb(51, 51, 51);
   width: 100%;
   height: 100%;
-`
+`;
 
+// Styled component for the image of the card
 const CardImage = styled.img`
   width: 100%;
   transform: scale(1);
@@ -38,27 +42,35 @@ const CardImage = styled.img`
   transition: opacity 180ms ease-out 0s, transform 0.15s ease-out 0s;
   opacity: 1;
   height: 100%;
-  z-index:100;
-`
+  z-index: 100;
+`;
 
 interface SliderItemProps {
   movie: Movie;
   category: string;
 }
 
-const SliderItem:React.FC<SliderItemProps> = ({movie, category}: SliderItemProps) => {
-  console.log(movie);
+const SliderItem: React.FC<SliderItemProps> = ({
+  movie,
+  category,
+}: SliderItemProps) => {
   return (
     <>
-      <Slide to={`/details/${movie.id}`}>
+      <Slide to={`/details/${movie.id}`} data-test-id="slider-item">
         <CardContainer>
           <CardSkeleton>
-            <CardImage src={movie.images.artwork.replace('.jpeg', '-width317-quality60.jpeg')} loading="lazy"></CardImage>
+            <CardImage
+              src={movie.images.artwork.replace(
+                ".jpeg",
+                "-width317-quality60.jpeg"
+              )}
+              loading="lazy"
+            ></CardImage>
           </CardSkeleton>
         </CardContainer>
       </Slide>
     </>
-  )
-}
+  );
+};
 
 export default SliderItem;

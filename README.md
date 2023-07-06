@@ -1,7 +1,6 @@
 # TODO
 - Implement unit test.
-- Catch errors.
+- Create loading and error page.
+- Implement Loopable sliders.
 - Create docs.
 - Refactor Redux.
-- Improve CSS, StyledComponents
-- Play video automatically.

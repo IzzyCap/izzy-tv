@@ -1,20 +1,22 @@
-import styled from 'styled-components';
-import SliderItem from './SliderItem';
-import { useAppSelector } from '../store/store';
-import { Categories } from '../utils/endpoint';
-import { ISlider } from '../store/features/sliderSlice';
-import { NextPage, PrevPage } from '../store/services/sliders';
-import { useDispatch } from 'react-redux';
-import { useRef } from 'react';
+import styled from "styled-components";
+import SliderItem from "./SliderItem";
+import { useAppSelector } from "../store/store";
+import { Categories } from "../utils/endpoint";
+import { ISlider } from "../store/features/mainSlice";
+import { NextPage, PrevPage } from "../store/services/sliders";
+import { useDispatch } from "react-redux";
+import { useRef } from "react";
 
+// Styled component for the container of the slider
 const SliderContainer = styled.div`
   width: 100%;
   text-align: center;
   position: relative;
   padding: 0px 0px 0px 40px;
   margin-bottom: 25px;
-`
+`;
 
+// Styled component for the slide container within the slider
 const Slides = styled.div`
   width: 100%;
   display: flex;
@@ -22,9 +24,10 @@ const Slides = styled.div`
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
-  transition: all .5s ease;
-`
+  transition: all 0.5s ease;
+`;
 
+// Styled component for the title of the slider
 const Title = styled.h5`
   transition: color 0.15s ease-out 0s;
   display: block;
@@ -35,112 +38,102 @@ const Title = styled.h5`
   text-align: left;
   line-height: 28px;
   margin-bottom: 10px;
-`
+`;
 
-// [TODO] merge Prev and Next
-const Prev = styled.div`
+// Reusable styled component for the navigation buttons
+const NavigationButton = styled.div`
   position: absolute;
-  background: linear-gradient(to left, transparent 0%, rgb(16, 16, 16) 90%);
   bottom: 0px;
+  width: 40px;
+  height: 100%;
+  z-index: 100;
+  img {
+    width: 100%;
+    height: 100%;
+    transition: 0.3s;
+    background: linear-gradient(to right, transparent 0%, rgb(0, 0, 0) 100%);
+    opacity: 0;
+    position: relative;
+    top: calc(50% + 10px);
+    transform: translateY(-50%);
+  }
+  &:hover {
+    img {
+      opacity: 1;
+    }
+  }
+`;
+
+// Styled component for the previous button
+const Prev = styled(NavigationButton)`
   left: 0;
-  width: 40px;
-  height: 100%;
-  z-index: 100;
-  img {
-    width: 100%;
-    height: 100%;
-    transition: 0.3s;
-    background: linear-gradient(to right, transparent 0%, rgb(0, 0, 0) 100%);
-    opacity: 0;
-    position: relative;
-    top: calc(50% + 10px);
-    transform: translateY(-50%)
-  }
-  &:hover { 
-    img {
-      opacity: 1;
-    }
-  }
-`
+  background: linear-gradient(to left, transparent 0%, rgb(16, 16, 16) 90%);
+`;
 
-const Next = styled.div`
-  position: absolute;
-  background: linear-gradient(to right, transparent 0%, rgb(0, 0, 0) 100%);
-  bottom: 0px;
+// Styled component for the next button
+const Next = styled(NavigationButton)`
   right: 0;
-  width: 40px;
-  height: 100%;
-  justify-content: center;
-  z-index: 100;
-  img {
-    width: 100%;
-    height: 100%;
-    transition: 0.3s;
-    background: linear-gradient(to right, transparent 0%, rgb(0, 0, 0) 100%);
-    opacity: 0;
-    position: relative;
-    top: calc(50% + 10px);
-    transform: translateY(-50%)
-  }
-  &:hover { 
-    img {
-      opacity: 1;
-    }
-  }
-`
+  background: linear-gradient(to right, transparent 0%, rgb(0, 0, 0) 100%);
+`;
 
 interface SliderProps {
   title: string;
   category: Categories;
 }
 
-const Slider:React.FC<SliderProps> = ({title, category}: SliderProps) => {  
+const Slider: React.FC<SliderProps> = ({ title, category }: SliderProps) => {
   const dispatch = useDispatch();
 
   const sliderRef = useRef<HTMLDivElement>(null);
 
+  // Retrieve the slider data from the Redux store
   const slider = useAppSelector((state: any) => {
-    // [TODO] maybe change sliderSlice to mainSlice
-    const sliders = state['sliderSlice'].sliders;
-    return sliders.find((slider: ISlider) => slider.category === category)
+    const sliders = state["mainSlice"].sliders;
+    return sliders.find((slider: ISlider) => slider.category === category);
   });
 
+  // Create the slider items based on the slider data
   const createSliderItems = () => {
     if (slider !== undefined) {
-      return (
-        slider.movies.map((movie: Movie) => { 
-          return (<SliderItem key={movie.title} movie={movie} category='test'></SliderItem>)
-        })
-      )
+      return slider.movies.map((movie: Movie) => {
+        return (
+          <SliderItem
+            key={movie.id}
+            movie={movie}
+            category={category}
+          ></SliderItem>
+        );
+      });
     }
-  }
+  };
+
+  // Handle the navigation of the slider
+  const handleSliderNavigation = (direction: 'prev' | 'next') => {
+    if (sliderRef.current?.scrollLeft) {
+      const scrollWidth = sliderRef.current?.clientWidth;
+      sliderRef.current.scrollLeft += direction === 'prev' ? -scrollWidth : scrollWidth;
+    }
+  
+    if (direction === 'prev') {
+      PrevPage(dispatch, slider);
+    } else {
+      NextPage(dispatch, slider);
+    }
+  };
 
   return (
     <SliderContainer>
       <Title>{title}</Title>
-      <Prev onClick={() => { 
-          PrevPage(dispatch, slider);
-          if (sliderRef.current?.scrollLeft) {
-            sliderRef.current.scrollLeft -= sliderRef.current?.clientWidth;
-          }
-        }
-      }>
-        <img src='/icons/left-arrow.svg'/>
+      <Prev onClick={() => handleSliderNavigation('prev')}>
+        <img src="/icons/left-arrow.svg" alt="Previous" />
       </Prev>
-      <Next onClick={() => {
-          NextPage(dispatch, slider);
-          if (sliderRef.current?.scrollLeft) {
-            sliderRef.current.scrollLeft += sliderRef.current?.clientWidth;
-          }
-        }
-      }>
-        <img src='/icons/right-arrow.svg'/>
+
+      <Next onClick={() => handleSliderNavigation('next')}>
+        <img src="/icons/right-arrow.svg" alt="Next" />
       </Next>
-      <Slides ref={sliderRef}>
-        {createSliderItems()}
-      </Slides>
+      <Slides ref={sliderRef}>{createSliderItems()}</Slides>
     </SliderContainer>
-  )
-}
+  );
+};
 
 export default Slider;

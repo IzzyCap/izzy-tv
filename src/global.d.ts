@@ -1,7 +1,7 @@
 interface Movie {
   classification: Classification;
-  duration: number,
-  higlighted_score: Score,
+  duration: number;
+  higlighted_score: Score;
   id: string;
   images: Image;
   label: string;
@@ -15,20 +15,20 @@ interface Movie {
 }
 
 interface Classification {
-  adult: boolean,
-  age: number,
-  default: boolean,
-  description: string,
-  id: string,
-  name: string,
-  numerical_id: number,
-  type: string,
+  adult: boolean;
+  age: number;
+  default: boolean;
+  description: string;
+  id: string;
+  name: string;
+  numerical_id: number;
+  type: string;
 }
 
 interface Score {
-  amount_of_votes: number,
-  formatted_amount_of_votes: string
-  score: number,
+  amount_of_votes: number;
+  formatted_amount_of_votes: string;
+  score: number;
 }
 
 interface Image {

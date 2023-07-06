@@ -1,27 +1,26 @@
 import { Fragment } from "react";
 import MainHeader from "./MainHeader";
-import styled from 'styled-components';
+import styled from "styled-components";
 
 interface LayoutProps {
-  children: React.ReactNode,
+  children: React.ReactNode;
 }
 
 const Content = styled.div`
-  margin-top: 88px;
-`
+  position: absolute;
+  top: 88px;
+  width: 100%;
+`;
 
-const Layout:React.FC<LayoutProps> = ({children}: LayoutProps) => {
-
+const Layout: React.FC<LayoutProps> = ({ children }: LayoutProps) => {
   return (
     <Fragment>
       <div>
-        <MainHeader/>
+        <MainHeader />
       </div>
-      <Content>
-        { children }
-      </Content>
+      <Content>{children}</Content>
     </Fragment>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;
