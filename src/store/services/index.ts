@@ -10,7 +10,7 @@ export const SetActiveMovie = async (dispatch: any, movie: Movie) => {
   }
 }
 
-export const ClearActiveMovie = async (dispatch: any, movie: Movie) => {
+export const ClearActiveMovie = async (dispatch: any) => {
   console.log('ClearActiveMovie');
   try {
     dispatch(clearActiveMovie());
