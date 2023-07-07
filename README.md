@@ -10,7 +10,7 @@ Izzy TV is a lite version of the web page [rakute.tv](https://www.rakuten.tv/es?
 - Suspense Movies.
 - Family Movies.
 
-Each Slider have n Movie items. When you click a item a detail page of the movie will apear with the plot and a button to watch the trailer.
+Each Slider has (n) Movie items. When you click an item, a detail page for the movie will appear with the plot and a button to watch the trailer.
 
 ## Dependencies
 

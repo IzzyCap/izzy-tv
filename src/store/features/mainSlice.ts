@@ -1,3 +1,4 @@
+// Redux slice that defines the main state and actions for managing movie sliders and the active movie.
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Categories, createCategoryEndpoint } from "../../utils/endpoint";
 
@@ -13,13 +14,14 @@ export interface MainState {
   sliders: ISlider[];
 }
 
+// Define the initial state of the main slice
 const initialState: MainState = {
   activeMovie: null,
   sliders: [],
 };
 
 /**
- * Create thunk with data fetching.
+ * Helper function to create thunks for fetching slider data.
  *
  * @param {string} prefix The thunk ID prefix.
  * @param {string} url The url to recieve data.
@@ -39,6 +41,7 @@ const createSliderFetcher = (prefix: string, url: string) => {
   });
 };
 
+// Create thunks for fetching data for each slider category
 export const fetchBest = createSliderFetcher(
   "best/fetch",
   createCategoryEndpoint(Categories.Best)
@@ -68,6 +71,7 @@ export const fetchFamily = createSliderFetcher(
   createCategoryEndpoint(Categories.Family)
 );
 
+// Create the main slice
 const mainSlice = createSlice({
   name: "main",
   initialState,
@@ -100,6 +104,7 @@ const mainSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    // Define the extra reducers for handling fulfilled action of each fetch thunk
     const addSliderFulfilledCase = (category: Categories, fetchAction: any) => {
       builder.addCase(fetchAction.fulfilled, (state, action) => {
         const slider: ISlider = {
@@ -132,6 +137,8 @@ const mainSlice = createSlice({
   },
 });
 
+// Extract & export the action creators from the main slice
 export const { nextPage, prevPage, setActiveMovie, clearActiveMovie } = mainSlice.actions;
 
+// Export the reducer function from the main slice
 export default mainSlice.reducer;
