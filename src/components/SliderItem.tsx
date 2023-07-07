@@ -8,6 +8,7 @@ const Slide = styled(Link)`
   margin: 0px 2px;
   transition: transform 180ms ease-out 0s;
   width: calc(14% - 5px);
+  overflow: hidden;
   justify-content: center;
   align-items: center;
   top: 0px;
