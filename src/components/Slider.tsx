@@ -7,6 +7,9 @@ import { NextPage, PrevPage } from "../store/services";
 import { useDispatch } from "react-redux";
 import { useRef } from "react";
 
+import { ReactComponent as LeftArrow } from "../assets/icons/left-arrow.svg";
+import { ReactComponent as RightArrow } from "../assets/icons/right-arrow.svg";
+
 // Styled component for the container of the slider
 const SliderContainer = styled.div`
   width: 100%;
@@ -47,7 +50,7 @@ const NavigationButton = styled.div`
   width: 40px;
   height: 100%;
   z-index: 100;
-  img {
+  svg {
     width: 100%;
     height: 100%;
     transition: 0.3s;
@@ -58,7 +61,7 @@ const NavigationButton = styled.div`
     transform: translateY(-50%);
   }
   &:hover {
-    img {
+    svg {
       opacity: 1;
     }
   }
@@ -125,11 +128,11 @@ const Slider: React.FC<SliderProps> = ({ title, category }: SliderProps) => {
     <SliderContainer>
       <Title>{title}</Title>
       <Prev onClick={() => handleSliderNavigation('prev')}>
-        <img src="/icons/left-arrow.svg" alt="Previous" />
+        <LeftArrow/>
       </Prev>
 
       <Next onClick={() => handleSliderNavigation('next')}>
-        <img src="/icons/right-arrow.svg" alt="Next" />
+        <RightArrow/>
       </Next>
       <Slides ref={sliderRef}>{createSliderItems()}</Slides>
     </SliderContainer>

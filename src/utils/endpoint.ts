@@ -1,5 +1,5 @@
-// As a temporal fix adding cors proxy from (https://justcors.com/) to avoid cors error
-const proxyPrefix: string = "https://justcors.com/tl_8852931/";
+// As a temporal fix adding cors proxy from (https://corsproxy.io/?) to avoid cors error
+const proxyPrefix: string = "https://corsproxy.io/?";
 const url: string = "https://gizmo.rakuten.tv/";
 
 const listPath: string = "v3/lists/";

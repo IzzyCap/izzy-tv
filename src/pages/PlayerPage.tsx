@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { ClearActiveMovie } from "../store/services";
 
+import { ReactComponent as Back } from "../assets/icons/back-button.svg";
+
 const PlayerContainer = styled.div`
   position: fixed;
   top: 88px;
@@ -28,7 +30,7 @@ const BackButton = styled(Link)`
   margin-top: 5px;
   margin-left: 15px;
   padding: 24px 16px;
-  img {
+  svg {
     width: 40px;
     height: 40px;
   }
@@ -67,7 +69,7 @@ export const PlayerPage = () => {
   return (
     <PlayerContainer>
       <BackButton to={`/details/${id}`} onClick={() => ClearActiveMovie(dispatch)}>
-        <img src="/icons/back-button.svg" />
+        <Back/>
       </BackButton>
       <VideoPlayer src={videoUrl}></VideoPlayer>
     </PlayerContainer>

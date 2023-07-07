@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { SetActiveMovie } from "../store/services";
 
+import { ReactComponent as Close } from "../assets/icons/close.svg";
+import { ReactComponent as Play } from "../assets/icons/play.svg";
+
 const Overly = styled.div`
   position: fixed;
   top: 0px;
@@ -199,7 +202,7 @@ export const DetailPage = () => {
       <DetailsContainer>
         <DetailsCard>
           <CloseButton to="/">
-            <img src="/icons/close.svg" />
+            <Close/>
           </CloseButton>
           <BannerContainer>
             <ImgContainer>
@@ -215,7 +218,7 @@ export const DetailPage = () => {
           <Container>
             <ButtonArea>
               <TrailerButton to={`/player/${id}`} onClick={() => SetActiveMovie(dispatch, movie)}>
-                <img src="/icons/play.svg" />
+                <Play/>
                 <ButtonText>Ver Tráiler</ButtonText>
               </TrailerButton>
             </ButtonArea>

@@ -1,8 +1,6 @@
 import { ISlider, nextPage, prevPage, setActiveMovie, clearActiveMovie } from "../features/mainSlice";
 
 export const SetActiveMovie = async (dispatch: any, movie: Movie) => {
-  console.log('SetActiveMovie');
-  console.log(movie);
   try {
     dispatch(setActiveMovie(movie));
   } catch (ex) {
@@ -11,7 +9,6 @@ export const SetActiveMovie = async (dispatch: any, movie: Movie) => {
 }
 
 export const ClearActiveMovie = async (dispatch: any) => {
-  console.log('ClearActiveMovie');
   try {
     dispatch(clearActiveMovie());
   } catch (ex) {

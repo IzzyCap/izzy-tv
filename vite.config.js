@@ -1,9 +1,10 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import svgr from "vite-plugin-svgr";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), svgr()],
   base: "",
   root: "src",
   publicDir: "../public",
@@ -16,9 +17,9 @@ export default defineConfig({
     setupFiles: "./__tests__/setup.ts",
   },
   server: {
-    port: 8000,
+    port: 3000,
   },
   preview: {
-    port: 8000,
+    port: 3000,
   },
 });

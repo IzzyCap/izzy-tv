@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { useAppSelector } from "../store/store";
 
+import { ReactComponent as Logo } from "../assets/icons/logo.svg";
+
 const MenuWrapper = styled.div`
   position: fixed;
   top: 0;
@@ -13,7 +15,7 @@ const MenuWrapper = styled.div`
   z-index: 1000;
 `;
 
-const HeaderLogo = styled.img`
+const HeaderLogo = styled(Logo)`
   width: 114px;
 `;
 
@@ -32,7 +34,7 @@ const MainHeader: React.FC = () => {
     if (!activeMovie) {
       return (
         <a>
-          <HeaderLogo src="/rakuten/logo.svg" alt="rakuten logo"></HeaderLogo>
+          <HeaderLogo/>
         </a>
       );
     }
