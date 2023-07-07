@@ -23,18 +23,25 @@ const CardContainer = styled.div`
 // Styled component for the skeleton of the card
 const CardSkeleton = styled.div`
   position: absolute;
+  background-origin: content-box;
+  padding: 6px;
   top: 50%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
   transition: width 180ms ease-out 0s, height 180ms ease-out 0s;
   background: rgb(51, 51, 51);
+  background-clip: content-box;
   width: 100%;
   height: 100%;
+  &:hover {
+    background: transparent;
+  }
 `;
 
 // Styled component for the image of the card
 const CardImage = styled.img`
   width: 100%;
+  margin: 5px;
   transform: scale(1);
   position: absolute;
   top: 0px;
@@ -43,6 +50,12 @@ const CardImage = styled.img`
   opacity: 1;
   height: 100%;
   z-index: 100;
+  &:hover {
+    top: -5px;
+    transition: 0.5s;
+    -webkit-filter: saturate(1.5);
+    filter: saturate(1.5);
+  }
 `;
 
 interface SliderItemProps {
