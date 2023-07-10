@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { styled } from "styled-components";
-import { fetchMovie } from "../utils/endpoint";
-import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { fetchMovie } from "../utils/endpoint";
 import { SetActiveMovie } from "../store/services";
-
 import { ReactComponent as Close } from "../assets/icons/close.svg";
 import { ReactComponent as Play } from "../assets/icons/play.svg";
+import Spinner from "../components/Spinner";
 
 const Overly = styled.div`
   position: fixed;
@@ -186,10 +185,10 @@ export const DetailPage = () => {
         setError("Failed to fetch trailer");
         setLoading(false);
       });
-  }, []);
+  }, [id]);
 
   if (loading) {
-    return <div>Loading...</div>; // Display a loading state
+    return <Spinner/>
   }
 
   if (error) {

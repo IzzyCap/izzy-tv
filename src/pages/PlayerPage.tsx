@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
-import { fetchTrailer } from "../utils/endpoint";
-import { Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { fetchTrailer } from "../utils/endpoint";
 import { ClearActiveMovie } from "../store/services";
-
 import { ReactComponent as Back } from "../assets/icons/back-button.svg";
+import Spinner from "../components/Spinner";
 
 const PlayerContainer = styled.div`
   position: fixed;
@@ -59,7 +58,7 @@ export const PlayerPage = () => {
   }, [id]);
 
   if (loading) {
-    return <div>Loading...</div>; // Display a loading state
+    return <Spinner/>
   }
 
   if (error) {
@@ -71,7 +70,7 @@ export const PlayerPage = () => {
       <BackButton to={`/details/${id}`} onClick={() => ClearActiveMovie(dispatch)}>
         <Back/>
       </BackButton>
-      <VideoPlayer src={videoUrl}></VideoPlayer>
+      <VideoPlayer src={`${videoUrl}`}></VideoPlayer>
     </PlayerContainer>
   );
 };
